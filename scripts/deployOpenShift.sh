@@ -397,11 +397,12 @@ new_nodes
 [OSEv3:vars]
 ansible_ssh_user=$SUDOUSER
 ansible_become=yes
+containerized=true
 openshift_install_examples=true
 deployment_type=openshift-enterprise
-openshift_release=v3.5
+openshift_release=v3.6
 docker_udev_workaround=True
-openshift_use_dnsmasq=false
+openshift_use_dnsmasq=true
 openshift_master_default_subdomain=$ROUTING
 openshift_override_hostname_check=true
 osm_use_cockpit=${COCKPIT}
@@ -484,9 +485,10 @@ ansible_ssh_user=$SUDOUSER
 ansible_become=yes
 openshift_install_examples=true
 deployment_type=openshift-enterprise
-openshift_release=v3.5
+containerized=true
+openshift_release=v3.6
 docker_udev_workaround=True
-openshift_use_dnsmasq=false
+openshift_use_dnsmasq=true
 openshift_master_default_subdomain=$ROUTING
 openshift_override_hostname_check=true
 osm_use_cockpit=${COCKPIT}

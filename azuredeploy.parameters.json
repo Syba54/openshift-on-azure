@@ -3,7 +3,7 @@
 	"contentVersion": "1.0.0.0",
 	"parameters": {
 		"_artifactsLocation": {
-			"value": "https://raw.githubusercontent.com/haroldwongms/openshift-containerplatform/master/"
+			"value": "https://raw.githubusercontent.com/sterburg/openshift-container-platform/master/"
 		},
 		"customVhdOrGallery": {
 			"value": "gallery"
@@ -24,13 +24,13 @@
 			"value": "Standard_DS2_v2"
 		},
 		"openshiftClusterPrefix": {
-			"value": "changeme"
+			"value": "ocp"
 		},
 		"openshiftMasterPublicIpDnsLabel": {
-			"value": "GEN-UNIQUE"
+			"value": "sterburg-openshift-api"
 		},
 		"infraLbPublicIpDnsLabel": {
-			"value": "GEN-UNIQUE"
+			"value": "sterburg-openshift-apps"
 		},
 		"masterInstanceCount": {
 			"value": 1
@@ -45,46 +45,46 @@
 			"value": 128
 		},
 		"adminUsername": {
-			"value": "changeme"
+			"value": "sterburg"
 		},
 		"openshiftPassword": {
 			"value": "changeme"
 		},
 		"enableMetrics": {
-			"value": "false"
+			"value": "true"
 		},
 		"enableLogging": {
-			"value": "false"
+			"value": "true"
 		},
 		"enableCockpit": {
-			"value": "false"
+			"value": "true"
 		},
 		"rhsmUsernamePasswordOrActivationKey": {
-			"value": "password"
+			"value": "activationkey"
 		},
 		"rhsmUsernameOrOrgId": {
-			"value": "changeme"
+			"value": "7769467"
 		},
 		"rhsmPasswordOrActivationKey": {
-			"value": "changeme"
+			"value": "azure"
 		},
 		"rhsmPoolId": {
-			"value": "changeme"
+			"value": "8a85f98b5ddf5041015de4158ecb0d43"
 		},
 		"sshPublicKey": {
-			"value": "GEN-SSH-PUB-KEY"
+			"value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkIwYuwUvULvMC2uZEv8hJwsBXi28+i6w3tjapS5LGjGgONdW5L5nehS8ud4BJExoJ+Bl1sUYDq8KOdwWT46OVGB1oReq0Zz4Y2U0E6waYFTOfCbpb/FRpaZojVhbIL4ko/IOw6msqqvhzdrXJNBmycccXxTRBa7EbBnF1mvRzSmhxAqP9C9itgH8AffNmxxh8X4O3zLdu56vX3VLiqDPFyaIyVC1ZuML7w6jsHIQeCDi1Iv7UE176CYx/o33V1C4QKe2VjzdssN7kENzJ65Xno29rRc4HnUDOrD8yTSI8qXVGXzaeITQDU6Q2A0oJaq+82ff14P3s7SgPqsKRFt59"
 		},
 		"keyVaultResourceGroup": {
-			"value": "changeme"
+			"value": "openshift"
 		},
 		"keyVaultName": {
-			"value": "changeme"
+			"value": "sterburg-vault"
 		},
 		"keyVaultSecret": {
-			"value": "changeme"
+			"value": "ssh-key"
 		},
 		"aadClientId": {
-			"value": "changeme"
+			"value": "0bb19c17-74fe-45e7-b0ea-f584181e7c8c"
 		},
 		"aadClientSecret": {
 			"value": "changeme"
@@ -93,7 +93,7 @@
 			"value": "xipio"
 		},
 		"defaultSubDomain": {
-			"value": "changeme"
+			"value": "openshift.eu"
 		}
 	}
 }

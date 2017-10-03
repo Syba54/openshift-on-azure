@@ -1,0 +1,35 @@
+{
+  "id": "bdb664f6-cd77-4566-9d68-d076ae9f6651",
+  "url": "https://ocpdemo.visualstudio.com/_apis/hooks/subscriptions/bdb664f6-cd77-4566-9d68-d076ae9f6651",
+  "status": "onProbation",
+  "publisherId": "tfs",
+  "eventType": "git.push",
+  "subscriber": null,
+  "resourceVersion": "1.0",
+  "eventDescription": "Repository OCPDemo",
+  "consumerId": "webHooks",
+  "consumerActionId": "httpRequest",
+  "actionDescription": "To host openshift.dvbmedia.nl",
+  "createdBy": {
+    "id": "d0cdecc2-3ae7-67b9-baf1-4edf135ad0da",
+    "displayName": "Samuel Terburg",
+    "uniqueName": "sam@verveeltzich.com"
+  },
+  "createdDate": "2017-10-02T10:45:20.207Z",
+  "modifiedBy": {
+    "id": "d0cdecc2-3ae7-67b9-baf1-4edf135ad0da",
+    "displayName": "Samuel Terburg",
+    "uniqueName": "sam@verveeltzich.com"
+  },
+  "modifiedDate": "2017-10-02T10:45:20.207Z",
+  "publisherInputs": {
+    "branch": "",
+    "projectId": "48e53845-ebb7-4e3d-a291-f28822c7ab88",
+    "pushedBy": "",
+    "repository": "1a1159f4-6ae2-4099-832e-e2c3f381f360",
+    "tfsSubscriptionId": "0619fa1f-096b-4840-b073-96b9698839f0"
+  },
+  "consumerInputs": {
+    "url": "https://openshift.dvbmedia.nl:8443/oapi/v1/namespaces/hoolia-eu/buildconfigs/www/webhooks/6n4Gm0LotdbHPRtNCPKY/generic"
+  },
+}

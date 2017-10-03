@@ -1,0 +1,17 @@
+{
+  "id": "1a1159f4-6ae2-4099-832e-e2c3f381f360",
+  "name": "OCPDemo",
+  "url": "https://ocpdemo.visualstudio.com/DefaultCollection/_apis/git/repositories/1a1159f4-6ae2-4099-832e-e2c3f381f360",
+  "project": {
+    "id": "48e53845-ebb7-4e3d-a291-f28822c7ab88",
+    "name": "OCPDemo",
+    "url": "https://ocpdemo.visualstudio.com/DefaultCollection/_apis/projects/48e53845-ebb7-4e3d-a291-f28822c7ab88",
+    "state": "wellFormed",
+    "revision": 8,
+    "visibility": "private"
+  },
+  "defaultBranch": "refs/heads/master",
+  "remoteUrl": "https://ocpdemo.visualstudio.com/_git/OCPDemo",
+  "sshUrl": "ssh://ocpdemo@vs-ssh.visualstudio.com:22/_ssh/OCPDemo",
+}
+

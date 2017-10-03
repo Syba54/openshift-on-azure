@@ -27,10 +27,10 @@
 			"value": "ocp"
 		},
 		"openshiftMasterPublicIpDnsLabel": {
-			"value": "sterburg-openshift-api"
+			"value": "openshift-api"
 		},
 		"infraLbPublicIpDnsLabel": {
-			"value": "sterburg-openshift-apps"
+			"value": "openshift-apps"
 		},
 		"masterInstanceCount": {
 			"value": 1
@@ -78,7 +78,7 @@
 			"value": "openshift"
 		},
 		"keyVaultName": {
-			"value": "sterburg-vault"
+			"value": "ssh-vault"
 		},
 		"keyVaultSecret": {
 			"value": "ssh-key"

@@ -1,0 +1,181 @@
+{
+  "options": [
+    {
+      "enabled": true,
+      "definition": {
+        "id": "5d58cc01-7c75-450c-be18-a388ddb129ec"
+      },
+      "inputs": {
+        "branchFilters": "[\"+refs/heads/*\"]",
+        "additionalFields": "{}"
+      }
+    },
+    {
+      "enabled": false,
+      "definition": {
+        "id": "a9db38f9-9fdc-478c-b0f9-464221e58316"
+      },
+      "inputs": {
+        "workItemType": "1780333",
+        "assignToRequestor": "true",
+        "additionalFields": "{}"
+      }
+    },
+    {
+      "enabled": false,
+      "definition": {
+        "id": "57578776-4c22-4526-aeb0-86b6da17ee9c"
+      },
+      "inputs": {}
+    }
+  ],
+  "variables": {
+    "system.debug": {
+      "value": "false",
+      "allowOverride": true
+    }
+  },
+  "retentionRules": [
+    {
+      "branches": [
+        "+refs/heads/*"
+      ],
+      "artifacts": [],
+      "artifactTypesToDelete": [
+        "FilePath",
+        "SymbolStore"
+      ],
+      "daysToKeep": 10,
+      "minimumToKeep": 1,
+      "deleteBuildRecord": true,
+      "deleteTestResults": true
+    }
+  ],
+  "buildNumberFormat": "$(date:yyyyMMdd)$(rev:.r)",
+  "jobAuthorizationScope": "projectCollection",
+  "jobTimeoutInMinutes": 60,
+  "jobCancelTimeoutInMinutes": 5,
+  "process": {
+    "phases": [
+      {
+        "dependencies": [],
+        "steps": [
+          {
+            "environment": {},
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Queue Jenkins Job: build-myapp",
+            "timeoutInMinutes": 0,
+            "refName": "JenkinsQueueJob1",
+            "task": {
+              "id": "c24b86d4-4256-4925-9a29-246f81aa64a7",
+              "versionSpec": "1.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "serverEndpoint": "$(Parameters.serverEndpoint)",
+              "jobName": "$(Parameters.jobName)",
+              "isMultibranchJob": "false",
+              "multibranchPipelineBranch": "",
+              "captureConsole": "true",
+              "capturePipeline": "true",
+              "parameterizedJob": "false",
+              "jobParameters": ""
+            }
+          }
+        ],
+        "variables": {},
+        "name": "Phase 1",
+        "target": {
+          "demands": [],
+          "executionOptions": {
+            "type": 0
+          },
+          "type": 1
+        },
+        "jobAuthorizationScope": "projectCollection",
+        "jobCancelTimeoutInMinutes": 1
+      }
+    ],
+    "type": 1
+  },
+  "repository": {
+    "properties": {
+      "cleanOptions": "0",
+      "labelSources": "0",
+      "labelSourcesFormat": "$(build.buildNumber)",
+      "reportBuildStatus": "true",
+      "gitLfsSupport": "false",
+      "skipSyncSource": "false",
+      "checkoutNestedSubmodules": "false",
+      "fetchDepth": "0"
+    },
+    "id": "1a1159f4-6ae2-4099-832e-e2c3f381f360",
+    "type": "TfsGit",
+    "name": "OCPDemo",
+    "url": "https://ocpdemo.visualstudio.com/_git/OCPDemo",
+    "defaultBranch": "refs/heads/changetitle",
+    "clean": "false",
+    "checkoutSubmodules": false
+  },
+  "processParameters": {
+    "inputs": [
+      {
+        "options": {},
+        "properties": {},
+        "name": "jobName",
+        "label": "Job name",
+        "defaultValue": "build-myapp",
+        "required": true,
+        "type": "string",
+        "helpMarkDown": "The name of the Jenkins job to queue.  This must exactly match the job name on the Jenkins server.",
+        "visibleRule": "",
+        "groupName": ""
+      },
+      {
+        "options": {},
+        "properties": {},
+        "name": "serverEndpoint",
+        "label": "Jenkins service endpoint",
+        "defaultValue": "bbc583e8-9248-48b5-a46b-471e52b4d09c",
+        "required": true,
+        "type": "connectedService:Jenkins",
+        "helpMarkDown": "Select the service endpoint for your Jenkins instance.  To create one, click the Manage link and create a new Jenkins service endpoint.",
+        "visibleRule": "",
+        "groupName": ""
+      }
+    ]
+  },
+  "quality": "definition",
+  "authoredBy": {
+    "id": "d0cdecc2-3ae7-67b9-baf1-4edf135ad0da",
+    "displayName": "Samuel Terburg",
+    "uniqueName": "sam@verveeltzich.com",
+    "url": "https://app.vssps.visualstudio.com/A1b7c9bb7-0d10-4393-8071-59740002c7b9/_apis/Identities/d0cdecc2-3ae7-67b9-baf1-4edf135ad0da",
+    "imageUrl": "https://ocpdemo.visualstudio.com/_api/_common/identityImage?id=d0cdecc2-3ae7-67b9-baf1-4edf135ad0da"
+  },
+  "queue": {
+    "id": 2,
+    "name": "Hosted",
+    "pool": {
+      "id": 2,
+      "name": "Hosted",
+      "isHosted": true
+    }
+  },
+  "name": "OCPDemo-Jenkins-CI",
+  "path": "\\",
+  "type": "build",
+  "queueStatus": "enabled",
+  "revision": 2,
+  "createdDate": "2017-10-03T07:11:23.99Z",
+  "project": {
+    "id": "48e53845-ebb7-4e3d-a291-f28822c7ab88",
+    "name": "OCPDemo",
+    "url": "https://ocpdemo.visualstudio.com/DefaultCollection/_apis/projects/48e53845-ebb7-4e3d-a291-f28822c7ab88",
+    "state": "wellFormed",
+    "revision": 8,
+    "visibility": "private"
+  }
+}

@@ -1,0 +1,10 @@
+- name: visualstudio-project playbook to bind the application
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  roles:
+  - role: ansible.kubernetes-modules
+    install_python_requirements: no
+  - role: ansibleplaybookbundle.asb-modules
+  - role: bind-visualstudio-project
+    playbook_debug: false

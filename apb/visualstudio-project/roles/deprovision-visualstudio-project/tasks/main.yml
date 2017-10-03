@@ -1,0 +1,14 @@
+---
+#############################################################################
+# Provision visualstudio-build
+#############################################################################
+- name: POST VisualStudio Build definition
+  uri:
+    url: "{{ url }}"
+    method: DELETE
+    user: "{{ vsts_username }}"
+    password: "{{ vsts_password }}"
+    force_basic_auth: yes
+    status_code: 200
+    body_format: json
+

@@ -1,0 +1,24 @@
+{
+  "data": {
+    "acceptUntrustedCerts": "true"
+  },
+  "id": "bbc583e8-9248-48b5-a46b-471e52b4d09c",
+  "name": "jenkins-on-openshift",
+  "type": "jenkins",
+  "url": "https://jenkins.openshift.dvbmedia.nl",
+  "createdBy": {
+    "id": "d0cdecc2-3ae7-67b9-baf1-4edf135ad0da",
+    "displayName": "Samuel Terburg",
+    "uniqueName": "sam@verveeltzich.com",
+    "url": "https://app.vssps.visualstudio.com/A1b7c9bb7-0d10-4393-8071-59740002c7b9/_apis/Identities/d0cdecc2-3ae7-67b9-baf1-4edf135ad0da",
+    "imageUrl": "https://ocpdemo.visualstudio.com/_api/_common/identityImage?id=d0cdecc2-3ae7-67b9-baf1-4edf135ad0da"
+  },
+  "authorization": {
+    "parameters": {
+      "username": "admin",
+      "password": null
+    },
+    "scheme": "UsernamePassword"
+  },
+  "isReady": true
+}

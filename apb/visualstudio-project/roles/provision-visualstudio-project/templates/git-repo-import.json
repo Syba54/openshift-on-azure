@@ -1,0 +1,7 @@
+{
+  "parameters": {
+    "gitSource": {
+      "url": "https://github.com/openshift/nodejs-ex.git"
+    }
+  }
+}

@@ -434,6 +434,21 @@ openshift_hosted_logging_deploy=$LOGGING
 openshift_hosted_logging_storage_kind=dynamic
 openshift_master_logging_public_url=https://kibana.$ROUTING
 
+# Setup Service Catalog
+openshift_enable_service_catalog=true
+openshift_template_service_broker_namespaces=['openshift','mycatalog']
+ansible_service_broker_image_prefix=openshift3/
+ansible_service_broker_registry_url="registry.access.redhat.com"
+#ansible_service_broker_registry_user=<user_name> 
+#ansible_service_broker_registry_password=<password> 
+#ansible_service_broker_registry_organization=<organization> 
+
+openshift_hosted_etcd_storage_kind=dynamic
+openshift_hosted_etcd_storage_volume_name=etcd-vol2
+openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]
+openshift_hosted_etcd_storage_volume_size=1G
+openshift_hosted_etcd_storage_labels={'storage': 'etcd'}
+
 # host group for masters
 [masters]
 $MASTER-0
@@ -520,6 +535,24 @@ openshift_metrics_cassandra_storage_type=dynamic
 openshift_hosted_logging_deploy=$LOGGING
 openshift_hosted_logging_storage_kind=dynamic
 openshift_master_logging_public_url=https://kibana.$ROUTING
+
+# Setup Service Catalog
+openshift_enable_service_catalog=true
+openshift_service_catalog_image_prefix=openshift3/ose-
+openshift_service_catalog_image_version=latest
+openshift_template_service_broker_namespaces=['openshift','mycatalog']
+ansible_service_broker_image_prefix=openshift3/
+ansible_service_broker_registry_url="registry.access.redhat.com"
+#ansible_service_broker_registry_user=<user_name> 
+#ansible_service_broker_registry_password=<password> 
+#ansible_service_broker_registry_organization=<organization> 
+
+openshift_hosted_etcd_storage_kind=dynamic
+openshift_hosted_etcd_storage_volume_name=etcd-vol2
+openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]
+openshift_hosted_etcd_storage_volume_size=1G
+openshift_hosted_etcd_storage_labels={'storage': 'etcd'}
+
 
 # host group for masters
 [masters]

@@ -1,0 +1,3 @@
+vsts_username: "{{ vsts_username | default(lookup('env','VSTS_USERNAME')) }}"
+vsts_password: "{{ vsts_password | default(lookup('env','VSTS_PASSWORD')) }}"
+vsts_instance: ocpdemo

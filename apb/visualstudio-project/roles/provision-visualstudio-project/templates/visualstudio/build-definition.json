@@ -111,11 +111,11 @@
       "checkoutNestedSubmodules": "false",
       "fetchDepth": "0"
     },
-    "id": "1a1159f4-6ae2-4099-832e-e2c3f381f360",
+    "id": "{{ vstsGitRepo.json.id }}",
     "type": "TfsGit",
-    "name": "OCPDemo",
-    "url": "https://ocpdemo.visualstudio.com/_git/OCPDemo",
-    "defaultBranch": "refs/heads/changetitle",
+    "name": "{{ vstsGitRepo.json.name }}",
+    "url": "https://{{ vsts_instance }}.visualstudio.com/_git/{{ vstsGitRepo.json.name }}",
+    "defaultBranch": "refs/heads/master",
     "clean": "false",
     "checkoutSubmodules": false
   },
@@ -126,7 +126,7 @@
         "properties": {},
         "name": "jobName",
         "label": "Job name",
-        "defaultValue": "build-myapp",
+        "defaultValue": "build-{{ project_name }}",
         "required": true,
         "type": "string",
         "helpMarkDown": "The name of the Jenkins job to queue.  This must exactly match the job name on the Jenkins server.",
@@ -164,18 +164,18 @@
       "isHosted": true
     }
   },
-  "name": "OCPDemo-Jenkins-CI",
+  "name": "{{ project_name }}-Jenkins-CI",
   "path": "\\",
   "type": "build",
   "queueStatus": "enabled",
   "revision": 2,
   "createdDate": "2017-10-03T07:11:23.99Z",
   "project": {
-    "id": "48e53845-ebb7-4e3d-a291-f28822c7ab88",
-    "name": "OCPDemo",
-    "url": "https://ocpdemo.visualstudio.com/DefaultCollection/_apis/projects/48e53845-ebb7-4e3d-a291-f28822c7ab88",
+    "id": "{{ vstsProject.json.id }}",
+    "name": "{{ vstsProject.json.name }}",
+    "url": "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/_apis/projects/{{ vstsProject.json.id }}",
     "state": "wellFormed",
     "revision": 8,
-    "visibility": "private"
+    "visibility": "public"
   }
 }

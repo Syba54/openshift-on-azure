@@ -1,4 +1,4 @@
 {
-  "name": "OCPDemo Team",
+  "name": "{{ project_name }} Team",
   "description": "The default project team."
 }

@@ -2,97 +2,9 @@
 #############################################################################
 # Provision visualstudio-build
 #############################################################################
-- name: Define VisualStudio Project
-  uri:
-    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/_apis/projects?api-version=2.0-preview"
-    method: POST
-    user: "{{ vsts_username }}"
-    password: "{{ vsts_password }}"
-    body: "{{ lookup('template','../templates/project-definition.json') }}"
-    force_basic_auth: yes
-    status_code: 200
-    return_content: yes
-    body_format: json
-    register: vstsProject
-
-- name: Define VisualStudio Team
-  uri:
-    url: "{{ vstsProject.json.url }}/teams?api-version=2.2"
-    method: POST
-    user: "{{ vsts_username }}"
-    password: "{{ vsts_password }}"
-    body: "{{ lookup('template','../templates/team-definition.json') }}"
-    force_basic_auth: yes
-    status_code: 200
-    body_format: json
-
-- name: Define VisualStudio Git repository
-  uri:
-    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/{{ vstsProject.json.id }}/_apis/git/repositories?api-version=1.0"
-    method: POST
-    user: "{{ vsts_username }}"
-    password: "{{ vsts_password }}"
-    body: "{{ lookup('template','../templates/git-repo-definition.json') }}"
-    force_basic_auth: yes
-    status_code: 200
-    return_content: yes
-    body_format: json
-    register: vstsRepo
-
-- name: Import VisualStudio Git repository
-  uri:
-    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/{{ vstsProject.json.id }}/_apis/git/repositories/{{ vstsRepo.json.id }}/importRequests?api-version=3.0-preview"
-    method: POST
-    user: "{{ vsts_username }}"
-    password: "{{ vsts_password }}"
-    body: "{{ lookup('template','../templates/git-repo-import.json') }}"
-    force_basic_auth: yes
-    status_code: 200
-    body_format: json
-
-- name: Define VisualStudio Build
-  uri:
-    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/{{ vstsProject.json.id }}/_apis/build/definitions?api-version=2.0"
-    method: POST
-    user: "{{ vsts_username }}"
-    password: "{{ vsts_password }}"
-    body: "{{ lookup('template','../templates/build-definition.json') }}"
-    force_basic_auth: yes
-    status_code: 200
-    body_format: json
-
-- name: Define VisualStudio Service endpoint
-  uri:
-    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/{{ vstsProject.json.id }}/_apis/_apis/distributedtask/serviceendpoints?api-version=3.0-preview.1"
-    method: POST
-    user: "{{ vsts_username }}"
-    password: "{{ vsts_password }}"
-    body: "{{ lookup('template','../templates/service-endpoint-definition.json') }}"
-    force_basic_auth: yes
-    status_code: 200
-    body_format: json
-
-- name: Define VisualStudio Hook subscription
-  uri:
-    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/_apis/hooks/subscriptions?api-version=1.0"
-    method: POST
-    user: "{{ vsts_username }}"
-    password: "{{ vsts_password }}"
-    body: "{{ lookup('template','../templates/hook-subscription-definition.json') }}"
-    force_basic_auth: yes
-    status_code: 200
-    body_format: json
-
-- name: Queue VisualStudio Build
-  uri:
-    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/{{ vstsProject.json.id }}/_apis/build/builds?api-version=2.0"
-    method: POST
-    user: "{{ vsts_username }}"
-    password: "{{ vsts_password }}"
-    body: "{{ lookup('template','../templates/build-queue.json') }}"
-    force_basic_auth: yes
-    status_code: 200
-    body_format: json
+- include: visualstudio.yml
+- include: openshift.yml
+- include: start.yml
 
 #############################################################################
 # Bindable services must make credentials available to the Ansible Service
@@ -105,5 +17,8 @@
     fields:
       username: "{{ vsts_username }}"
       password: "{{ vsts_password }}"
-      url: "{{ vstsProject.json.url }}"
-      id: "{{ vstsProject.json.id }}"
+      project_url: "{{ vstsProject.json.url }}"
+      project_id: "{{ vstsProject.json.id }}"
+      git_url: "{{ vstsGitRepo.json.remoteUrl }}"
+  tags:
+  - always

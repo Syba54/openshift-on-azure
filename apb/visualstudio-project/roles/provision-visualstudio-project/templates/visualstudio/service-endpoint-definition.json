@@ -2,7 +2,6 @@
   "data": {
     "acceptUntrustedCerts": "true"
   },
-  "id": "bbc583e8-9248-48b5-a46b-471e52b4d09c",
   "name": "jenkins-on-openshift",
   "type": "jenkins",
   "url": "https://jenkins.openshift.dvbmedia.nl",
@@ -16,7 +15,7 @@
   "authorization": {
     "parameters": {
       "username": "admin",
-      "password": null
+      "password": "admin"
     },
     "scheme": "UsernamePassword"
   },

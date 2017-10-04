@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  creationTimestamp: null
+  labels:
+    app: {{ project_name }}
+  name: {{ project_name }}
+spec:
+  replicas: 1
+  selector:
+    app: {{ project_name }}
+    deploymentconfig: {{ project_name }}
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: {{ project_name }}
+        deploymentconfig: {{ project_name }}
+    spec:
+      containers:
+      - image: {{ project_name }}:latest
+        name: {{ project_name }}
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - {{ project_name }}
+      from:
+        kind: ImageStreamTag
+        name: {{ project_name }}:latest
+    type: ImageChange

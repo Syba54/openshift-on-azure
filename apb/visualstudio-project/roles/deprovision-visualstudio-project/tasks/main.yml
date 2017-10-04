@@ -2,13 +2,45 @@
 #############################################################################
 # Provision visualstudio-build
 #############################################################################
-- name: POST VisualStudio Build definition
+- name: "Get VisualStudio Project: {{ project_name }}"
   uri:
-    url: "{{ url }}"
+    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/_apis/projects/{{ project_name }}?api-version=1.0"
+    user: "{{ vsts_username }}"
+    password: "{{ vsts_password }}"
+    force_basic_auth: yes
+    return_content: yes
+    body_format: json
+  register: vstsProject
+
+- name: "Delete VisualStudio Project: {{ project_name }}"
+  uri:
+    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/_apis/projects/{{ vstsProject.json.id }}?api-version=1.0"
     method: DELETE
     user: "{{ vsts_username }}"
     password: "{{ vsts_password }}"
     force_basic_auth: yes
-    status_code: 200
+    status_code: 200,201,202,204
+    return_content: yes
     body_format: json
+  register: vstsProjectDelete
+  tags:
+  - visualstudio
+
+- include: openshift.yml
+
+- name: "Wait for project delete completion: {{ project_name }}"
+  uri:
+    url: "{{ vstsProjectDelete.json.url }}"
+    user: "{{ vsts_username }}"
+    password: "{{ vsts_password }}"
+    force_basic_auth: yes
+    return_content: yes
+    body_format: json
+  register: vstsProjectDelete
+  until: vstsProjectDelete.json.status == "succeeded"
+  retries: 100
+  delay: 1
+  tags:
+  - visualstudio
+
 

@@ -2,6 +2,10 @@
   hosts: localhost
   gather_facts: false
   connection: local
+  vars:
+  - namespace: nodejs
+  - git_repo: https://github.com/openshift/nodejs-ex.git
+  - project_name: autotest000
   roles:
   - role: ansible.kubernetes-modules
     install_python_requirements: no

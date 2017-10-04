@@ -1,0 +1,31 @@
+---
+#############################################################################
+# Provision openshift-build
+#############################################################################
+- name: "Set local git config"
+  lineinfile:
+    create: yes
+    path: "{{ lookup('env','HOME') }}/.gitconfig"
+    regexp: 'helper = store'
+    line: "[credential]\n        helper = store"
+  tags:
+  - openshift
+
+- name: "Set local git credentials"
+  lineinfile:
+    create: yes
+    path: "{{ lookup('env','HOME') }}/.git-credentials"
+    regexp: 'visualstudio.com'
+    line: "https://{{ vsts_username |urlencode }}:{{ vsts_password |urlencode }}@{{ vsts_instance }}.visualstudio.com"
+  tags:
+  - openshift
+
+- name: "Define OpenShift git Secret"
+  command: "oc -n {{ namespace }} secrets new-basicauth git --username='{{ vsts_username }}' --password='{{ vsts_password }}'"
+  tags:
+  - openshift
+
+- name: "Define OpenShift new app"
+  command: "oc -n {{ namespace }} new-app --name='{{ project_name }}' --code='{{ vstsGitRepo.json.remoteUrl }}'"
+  tags:
+  - openshift

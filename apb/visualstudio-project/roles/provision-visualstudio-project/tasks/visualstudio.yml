@@ -1,0 +1,163 @@
+---
+#############################################################################
+# Provision visualstudio-build
+#############################################################################
+- name: "Define VisualStudio Project: {{ project_name }}"
+  uri:
+    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/_apis/projects?api-version=2.0-preview"
+    method: POST
+    user: "{{ vsts_username }}"
+    password: "{{ vsts_password }}"
+    body: "{{ lookup('template','../templates/visualstudio/project-definition.json') }}"
+    force_basic_auth: yes
+    status_code: 202
+    return_content: yes
+    body_format: json
+  register: vstsProjectCreate
+  tags:
+  - visualstudio
+
+- name: "Wait for project creation completion: {{ project_name }}"
+  uri:
+    url: "{{ vstsProjectCreate.json.url }}"
+    user: "{{ vsts_username }}"
+    password: "{{ vsts_password }}"
+    force_basic_auth: yes
+    return_content: yes
+    body_format: json
+  register: vstsProjectCreate
+  until: vstsProjectCreate is defined and vstsProjectCreate.json is defined and vstsProjectCreate.json.status == "succeeded"
+  retries: 100
+  delay: 1
+  tags:
+  - visualstudio
+
+- name: "Get VisualStudio Project: {{ project_name }}"
+  uri:
+    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/_apis/projects/{{ project_name }}?api-version=1.0"
+    user: "{{ vsts_username }}"
+    password: "{{ vsts_password }}"
+    force_basic_auth: yes
+    return_content: yes
+    body_format: json
+  register: vstsProject
+  until: vstsProject|succeeded
+  retries: 10
+  delay: 1
+  tags:
+  - openshift
+  - visualstudio
+
+## Team is auto-created when Project is created ##
+#- name: Define VisualStudio Team
+#  uri:
+#    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/_apis/projects/{{ vstsProject.json.id }}/teams?api-version=2.2"
+#    method: POST
+#    user: "{{ vsts_username }}"
+#    password: "{{ vsts_password }}"
+#    body: "{{ lookup('template','../templates/visualstudio/team-definition.json') }}"
+#    force_basic_auth: yes
+#    status_code: 200
+#    body_format: json
+
+## Git repo is auto-created when Project is created ##
+#- name: Define VisualStudio Git repository
+#  uri:
+#    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/{{ vstsProject.json.id }}/_apis/git/repositories?api-version=1.0"
+#    method: POST
+#    user: "{{ vsts_username }}"
+#    password: "{{ vsts_password }}"
+#    body: "{{ lookup('template','../templates/visualstudio/git-repo-definition.json') }}"
+#    force_basic_auth: yes
+#    status_code: 201
+#    return_content: yes
+#    body_format: json
+#  register: vstsGitRepo
+
+- name: "Get VisualStudio Git repository: {{ project_name }}"
+  uri:
+    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/{{ vstsProject.json.id }}/_apis/git/repositories/{{ project_name }}?api-version=1.0"
+    user: "{{ vsts_username }}"
+    password: "{{ vsts_password }}"
+    force_basic_auth: yes
+    return_content: yes
+    body_format: json
+  register: vstsGitRepo
+  until: vstsGitRepo|succeeded
+  retries: 10
+  delay: 1
+  tags:
+  - openshift
+  - visualstudio
+
+- name: "Import VisualStudio Git repository: {{ git_repo }}"
+  uri:
+    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/{{ vstsProject.json.id }}/_apis/git/repositories/{{ vstsGitRepo.json.id }}/importRequests?api-version=3.0-preview"
+    method: POST
+    user: "{{ vsts_username }}"
+    password: "{{ vsts_password }}"
+    body: "{{ lookup('template','../templates/visualstudio/git-repo-import.json') }}"
+    force_basic_auth: yes
+    return_content: yes
+    status_code: 200,201,202
+    body_format: json
+  register: vstsGitImport
+  tags:
+  - visualstudio
+
+- name: Define VisualStudio Build
+  uri:
+    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/{{ vstsProject.json.id }}/_apis/build/definitions?api-version=2.0"
+    method: POST
+    user: "{{ vsts_username }}"
+    password: "{{ vsts_password }}"
+    body: "{{ lookup('template','../templates/visualstudio/build-definition.json') }}"
+    force_basic_auth: yes
+    status_code: 200,201,202
+    return_content: yes
+    body_format: json
+  register: vstsBuild
+  tags:
+  - visualstudio
+
+- name: Define VisualStudio Service endpoint
+  uri:
+    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/{{ vstsProject.json.id }}/_apis/distributedtask/serviceendpoints?api-version=3.0-preview.1"
+    method: POST
+    user: "{{ vsts_username }}"
+    password: "{{ vsts_password }}"
+    body: "{{ lookup('template','../templates/visualstudio/service-endpoint-definition.json') }}"
+    force_basic_auth: yes
+    status_code: 200,201,202
+    body_format: json
+  tags:
+  - visualstudio
+
+- name: Define VisualStudio Hook subscription
+  uri:
+    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/_apis/hooks/subscriptions?api-version=1.0"
+    method: POST
+    user: "{{ vsts_username }}"
+    password: "{{ vsts_password }}"
+    body: "{{ lookup('template','../templates/visualstudio/hook-subscription-definition.json') }}"
+    force_basic_auth: yes
+    status_code: 200,201,202
+    body_format: json
+  tags:
+  - visualstudio
+
+- name: "Wait for Git import completion: {{ project_name }}"
+  uri:
+    url: "{{ vstsGitImport.json.url }}"
+    user: "{{ vsts_username }}"
+    password: "{{ vsts_password }}"
+    force_basic_auth: yes
+    return_content: yes
+    body_format: json
+  register: vstsGitImport
+  until: vstsGitImport is defined and vstsGitImport.json is defined and vstsGitImport.json.status == "completed"
+  retries: 100
+  delay: 1
+  tags:
+  - visualstudio
+

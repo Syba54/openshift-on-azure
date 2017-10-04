@@ -1,0 +1,21 @@
+{
+  "status": "onProbation",
+  "publisherId": "tfs",
+  "eventType": "git.push",
+  "subscriber": null,
+  "resourceVersion": "1.0",
+  "eventDescription": "Repository {{ vstsGitRepo.json.name }}",
+  "consumerId": "webHooks",
+  "consumerActionId": "httpRequest",
+  "actionDescription": "To openshift",
+  "publisherInputs": {
+    "branch": "",
+    "projectId": "{{ vstsProject.json.id }}",
+    "pushedBy": "",
+    "repository": "{{ vstsGitRepo.json.id }}",
+    "tfsSubscriptionId": "0619fa1f-096b-4840-b073-96b9698839f0"
+  },
+  "consumerInputs": {
+    "url": "https://openshift.dvbmedia.nl:8443/oapi/v1/namespaces/hoolia-eu/buildconfigs/www/webhooks/6n4Gm0LotdbHPRtNCPKY/generic"
+  }
+}

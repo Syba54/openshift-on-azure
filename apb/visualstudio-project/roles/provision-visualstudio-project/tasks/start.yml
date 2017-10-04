@@ -1,0 +1,14 @@
+---
+- name: Queue VisualStudio Build
+  uri:
+    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/{{ vstsProject.json.id }}/_apis/build/builds?api-version=2.0"
+    method: POST
+    user: "{{ vsts_username }}"
+    password: "{{ vsts_password }}"
+    body: "{{ lookup('template','../templates/visualstudio/build-queue.json') }}"
+    force_basic_auth: yes
+    status_code: 200,201,202
+    body_format: json
+  tags:
+  - visualstudio
+  - start

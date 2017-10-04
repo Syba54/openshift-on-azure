@@ -1,0 +1,186 @@
+---
+#############################################################################
+# Provision openshift-build
+#############################################################################
+#- name: "Define OpenShift BuildConfig: "{{ project_name }}"
+#  openshift_v1_build_config:
+#    namespace: '{{ namespace }}'
+#    name: "{{ project_name }}"
+#    spec_output_image_labels:
+#    - project: "{{ project_name }}"
+#    - source: vsts
+#    spec_output_to_name: "{{ project_name }}"
+#    spec_output_to_namespace: openshift
+#    revision_git_author_name: Visual Studio Team Services
+#    spec_source_git_ref: "{{ vstsGitRepo.json.defaultBranch }}"
+#    spec_source_git_uri: "{{ vstsGitRepo.json.remoteUrl }}"
+#    spec_source_images: openshift/nodejs
+#    spec_source_type: source
+    
+#- name: "Define OpenShift BuildConfig: "{{ project_name }}"
+#  command: "oc new-build "{{ vstsGitrepo.json.remoteUrl }}"
+
+#- name: "Define OpenShift Git Secret"
+#  k8s_v1_secret:
+#    namespace: "{{ namespace }}"
+#    verify_ssl: False
+#    resource_definition:
+#      type: kubernetes.io/basic-auth
+#      metadata:
+#        annotations:
+#          build.openshift.io/source-secret-match-uri-1: "{{ vstsGitRepo.json.remoteUrl }}/*"
+#        creationTimestamp: null
+#        name: git
+#      data:
+#        username: "{{ vsts_username | b64encode }}"
+#        password: "{{ vsts_password | b64encode }}"
+#      status:
+#        dockerImageRepository: ""
+#  ignore_errors: true
+#  tags:
+#  - openshift
+- name: "Define OpenShift git Secret"
+  command: "oc -n {{ namespace }} secrets new-basicauth git --username='{{ vsts_username }}' --password='{{ vsts_password }}'"
+  tags:
+  - openshift
+
+#- name: "Define OpenShift ImageStream"
+#  openshift_v1_image_stream:
+#    namespace: "{{ namespace }}"
+#    verify_ssl: False
+#    resource_definition:
+#      metadata:
+#        creationTimestamp: null
+#        labels:
+#          app: "{{ project_name }}"
+#        name: "{{ project_name }}"
+#      spec: {}
+#  tags:
+#  - openshift
+#
+#- name: "Define OpenShift BuildConfig"
+#  openshift_v1_build_config:
+#    namespace: "{{ namespace }}"
+#    verify_ssl: False
+#    resource_definition:
+#      metadata:
+#        creationTimestamp: null
+#        labels:
+#          app: "{{ project_name }}"
+#        name: "{{ project_name }}"
+#      spec:
+#        output:
+#          to:
+#            kind: ImageStreamTag
+#            name: "{{ project_name }}:latest"
+#        postCommit: {}
+#        resources: {}
+#        source:
+#          git:
+#            uri: "https://{{ vsts_instance }}.visualstudio.com/_git/{{ project_name }}"
+#            sourceSecret:
+#              name: git
+#          type: Git
+#        strategy:
+#          sourceStrategy:
+#            from:
+#              kind: ImageStreamTag
+#              name: nodejs:6
+#              namespace: openshift
+#          type: Source
+#        triggers:
+#        - github:
+#            secret: 8kdCwBdWpup5OydYqXCj
+#          type: GitHub
+#        - generic:
+#            secret: wuve0D41bIFHPU_DzT5-
+#          type: Generic
+#        - type: ConfigChange
+#        - imageChange: {}
+#          type: ImageChange
+#      status:
+#        lastVersion: 0
+#  register: ocpBuildConfig
+#  tags:
+#  - openshift
+#
+#- debug: var=ocpBuildConfig
+#  tags:
+#  - openshift
+#
+#- name: "Define OpenShift DeploymentConfig"
+#  openshift_v1_deployment_config:
+#    namespace: "{{ namespace }}"
+#    verify_ssl: False
+#    resource_definition:
+#      metadata:
+#        creationTimestamp: null
+#        labels:
+#          app: "{{ project_name }}"
+#        name: "{{ project_name }}"
+#      spec:
+#        replicas: 1
+#        selector:
+#          app: "{{ project_name }}"
+#          deploymentconfig: "{{ project_name }}"
+#        strategy:
+#          resources: {}
+#        template:
+#          metadata:
+#            creationTimestamp: null
+#            labels:
+#              app: "{{ project_name }}"
+#              deploymentconfig: "{{ project_name }}"
+#          spec:
+#            containers:
+#            - image: "{{ project_name }}:latest"
+#              name: "{{ project_name }}"
+#              ports:
+#              - containerPort: 8080
+#                protocol: TCP
+#              resources: {}
+#        test: false
+#        triggers:
+#        - type: ConfigChange
+#        - imageChangeParams:
+#            automatic: true
+#            containerNames:
+#            - "{{ project_name }}"
+#            from:
+#              kind: ImageStreamTag
+#              name: "{{ project_name }}:latest"
+#          type: ImageChange
+#      status:
+#        availableReplicas: 0
+#        latestVersion: 0
+#        observedGeneration: 0
+#        replicas: 0
+#        unavailableReplicas: 0
+#        updatedReplicas: 0
+#  tags:
+#  - openshift
+#
+#- name: "Define OpenShift Service"
+#  k8s_v1_service:
+#    namespace: "{{ namespace }}"
+#    verify_ssl: False
+#    resource_definition:
+#      metadata:
+#        creationTimestamp: null
+#        labels:
+#          app: "{{ project_name }}"
+#        name: "{{ project_name }}"
+#      spec:
+#        ports:
+#        - name: 8080-tcp
+#          port: 8080
+#          protocol: TCP
+#          targetPort: 8080
+#        selector:
+#          app: "{{ project_name }}"
+#          deploymentconfig: "{{ project_name }}"
+#      status:
+#        loadBalancer: {}
+#  tags:
+#  - openshift
+

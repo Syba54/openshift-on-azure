@@ -436,8 +436,9 @@ openshift_master_logging_public_url=https://kibana.$ROUTING
 
 # Setup Service Catalog
 openshift_enable_service_catalog=true
+openshift_service_catalog_image_prefix=openshift3/ose-
 openshift_template_service_broker_namespaces=['openshift','mycatalog']
-ansible_service_broker_image_prefix=openshift3/
+ansible_service_broker_image_prefix=openshift3/ose-
 ansible_service_broker_registry_url="registry.access.redhat.com"
 #ansible_service_broker_registry_user=<user_name> 
 #ansible_service_broker_registry_password=<password> 
@@ -541,7 +542,7 @@ openshift_enable_service_catalog=true
 openshift_service_catalog_image_prefix=openshift3/ose-
 openshift_service_catalog_image_version=latest
 openshift_template_service_broker_namespaces=['openshift','mycatalog']
-ansible_service_broker_image_prefix=openshift3/
+ansible_service_broker_image_prefix=openshift3/ose-
 ansible_service_broker_registry_url="registry.access.redhat.com"
 #ansible_service_broker_registry_user=<user_name> 
 #ansible_service_broker_registry_password=<password> 

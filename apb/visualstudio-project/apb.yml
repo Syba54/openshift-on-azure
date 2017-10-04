@@ -6,16 +6,16 @@ async: optional
 metadata:
   displayName: visualstudio-project
 plans:
-  - name: default
-    description: Free Subscription
-    free: True
-    metadata: {}
-    parameters: []
-      - name: project_name
-        title: Project name
-        type: string
-        default: nodejs-ex
-      - name: gitrepo_import
-        title: Existing GIT repository to import
-        type: string
-        default: https://github.com/openshift/nodejs-ex.git
+- name: default
+  description: Free Subscription
+  free: True
+  metadata: {}
+  parameters:
+  - name: project_name
+    title: Project name
+    type: string
+    default: nodejs-ex
+  - name: git_repo
+    title: Existing GIT repository to import
+    type: string
+    default: https://github.com/openshift/nodejs-ex.git

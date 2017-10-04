@@ -1,5 +1,5 @@
-name: visualstudio-project
-image: sterburg/visualstudio-project
+name: visualstudio-project-apb
+image: sterburg/visualstudio-project-apb
 description: a *Visual Studio Team Services* Project
 bindable: True
 async: optional

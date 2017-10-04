@@ -1,0 +1,21 @@
+FROM ansibleplaybookbundle/apb-base
+
+LABEL "com.redhat.apb.version"="1.0"
+LABEL "com.redhat.apb.spec"=\
+"bmFtZTogdmlzdWFsc3R1ZGlvLXByb2plY3QtYXBiCmltYWdlOiBzdGVyYnVyZy92aXN1YWxzdHVk\
+aW8tcHJvamVjdC1hcGIKZGVzY3JpcHRpb246IGEgKlZpc3VhbCBTdHVkaW8gVGVhbSBTZXJ2aWNl\
+cyogUHJvamVjdApiaW5kYWJsZTogVHJ1ZQphc3luYzogb3B0aW9uYWwKbWV0YWRhdGE6CiAgZGlz\
+cGxheU5hbWU6IHZpc3VhbHN0dWRpby1wcm9qZWN0CnBsYW5zOgotIG5hbWU6IGRlZmF1bHQKICBk\
+ZXNjcmlwdGlvbjogRnJlZSBTdWJzY3JpcHRpb24KICBmcmVlOiBUcnVlCiAgbWV0YWRhdGE6IHt9\
+CiAgcGFyYW1ldGVyczoKICAtIG5hbWU6IHByb2plY3RfbmFtZQogICAgdGl0bGU6IFByb2plY3Qg\
+bmFtZQogICAgdHlwZTogc3RyaW5nCiAgICBkZWZhdWx0OiBub2RlanMtZXgKICAtIG5hbWU6IGdp\
+dF9yZXBvCiAgICB0aXRsZTogRXhpc3RpbmcgR0lUIHJlcG9zaXRvcnkgdG8gaW1wb3J0CiAgICB0\
+eXBlOiBzdHJpbmcKICAgIGRlZmF1bHQ6IGh0dHBzOi8vZ2l0aHViLmNvbS9vcGVuc2hpZnQvbm9k\
+ZWpzLWV4LmdpdAo="
+
+ENV PYTHONWARNINGS="ignore:Unverified HTTPS request"
+
+COPY playbooks /opt/apb/actions
+COPY roles /opt/ansible/roles
+RUN chmod -R g=u /opt/{ansible,apb}
+USER apb

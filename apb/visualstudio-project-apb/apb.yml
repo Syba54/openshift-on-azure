@@ -1,35 +1,32 @@
 ---
 version: 1.0
 name: visualstudio-project-apb
-image: sterburg/visualstudio-project-apb
-description: a *Visual Studio Team Services* Project
+description: VisualStudio apb implementation
 bindable: false
 async: optional
-tags:
-  - visualstudio
-  - workspace
 metadata:
-  displayName: VisualStudio Project
-  providerDisplayName: "Samuel Terburg, Inc."
-  documentationUrl: https://www.visualstudio.com
-  longDescription: An apb that provisions a Visual Studio project
+  documentationUrl: https://www.mediawiki.org/wiki/Documentation
+  longDescription: An apb that deploys a VisualStudio.com project
+  dependencies: ['docker.io/ansibleplaybookbundle/mediawiki123:latest']
+  displayName: VisualStudio (APB)
   console.openshift.io/iconClass: icon-mediawiki
+  providerDisplayName: "STerburg, Inc."
 plans:
   - name: default
-    description: Free Subscription
+    description: An APB that deploys 1 VisualStudio project
     free: true
     metadata:
       displayName: Default
-      longDescription: This plan deploys a single visualstudio project
+      longDescription: This plan deploys a single VisualStudio project
       cost: $0.00
     parameters:
       - name: project_name
-        title: Project name
+        default: nodejs
         type: string
-        default: nodejs-ex
+        title: Project Name
         required: true
       - name: git_repo
-        title: Existing GIT repository to import
+        default: "https://github.com/openshift/nodejs-ex.git"
         type: string
-        default: https://github.com/openshift/nodejs-ex.git
+        title: Git Repo to clone
         required: true

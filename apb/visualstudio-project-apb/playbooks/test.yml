@@ -3,9 +3,8 @@
   gather_facts: false
   connection: local
   vars:
-  - namespace: nodejs
-  - git_repo: https://github.com/openshift/nodejs-ex.git
-  - project_name: autotest000
+  - namespace: dotnet-dev
+  - git_repo: https://github.com/redhat-developer/s2i-dotnetcore-ex.git
   roles:
   - role: ansible.kubernetes-modules
     install_python_requirements: no

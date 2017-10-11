@@ -26,6 +26,6 @@
   - openshift
 
 - name: "Define OpenShift new app"
-  command: "oc -n {{ namespace }} new-app --name='{{ project_name }}' --code='{{ vstsGitRepo.json.remoteUrl }}'"
+  command: "oc -n {{ namespace }} new-app --name='{{ namespace }}' --code='{{ vstsGitRepo.json.remoteUrl }}'"
   tags:
   - openshift

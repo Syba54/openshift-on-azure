@@ -1,4 +1,4 @@
 {
-  "name": "{{ project_name }} Team",
+  "name": "{{ namespace }} Team",
   "description": "The default project team."
 }

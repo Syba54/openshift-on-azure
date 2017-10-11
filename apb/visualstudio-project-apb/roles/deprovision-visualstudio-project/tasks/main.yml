@@ -2,9 +2,9 @@
 #############################################################################
 # Provision visualstudio-build
 #############################################################################
-- name: "Get VisualStudio Project: {{ project_name }}"
+- name: "Get VisualStudio Project: {{ namespace }}"
   uri:
-    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/_apis/projects/{{ project_name }}?api-version=1.0"
+    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/_apis/projects/{{ namespace }}?api-version=1.0"
     user: "{{ vsts_username }}"
     password: "{{ vsts_password }}"
     force_basic_auth: yes
@@ -12,7 +12,7 @@
     body_format: json
   register: vstsProject
 
-- name: "Delete VisualStudio Project: {{ project_name }}"
+- name: "Delete VisualStudio Project: {{ namespace }}"
   uri:
     url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/_apis/projects/{{ vstsProject.json.id }}?api-version=1.0"
     method: DELETE
@@ -28,7 +28,7 @@
 
 - include: openshift.yml
 
-- name: "Wait for project delete completion: {{ project_name }}"
+- name: "Wait for project delete completion: {{ namespace }}"
   uri:
     url: "{{ vstsProjectDelete.json.url }}"
     user: "{{ vsts_username }}"

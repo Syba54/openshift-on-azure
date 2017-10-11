@@ -1,15 +1,15 @@
 ---
 version: 1.0
-name: visualstudio-project-apb
+name: visualstudio-apb
+image: sterburg/visualstudio-apb
 description: VisualStudio apb implementation
 bindable: false
 async: optional
 metadata:
-  documentationUrl: https://www.mediawiki.org/wiki/Documentation
+  documentationUrl: https://www.visualstudio.com
   longDescription: An apb that deploys a VisualStudio.com project
-  dependencies: ['docker.io/ansibleplaybookbundle/mediawiki123:latest']
   displayName: VisualStudio (APB)
-  console.openshift.io/iconClass: icon-mediawiki
+  console.openshift.io/iconClass: icon-dotnet
   providerDisplayName: "STerburg, Inc."
 plans:
   - name: default
@@ -18,15 +18,10 @@ plans:
     metadata:
       displayName: Default
       longDescription: This plan deploys a single VisualStudio project
-      cost: $0.00
+      cost: "$0.00"
     parameters:
-      - name: project_name
-        default: nodejs
-        type: string
-        title: Project Name
-        required: true
       - name: git_repo
-        default: "https://github.com/openshift/nodejs-ex.git"
+        default: "https://github.com/redhat-developer/s2i-dotnetcore-ex.git"
         type: string
         title: Git Repo to clone
         required: true

@@ -2,24 +2,6 @@
 #############################################################################
 # Provision openshift-build
 #############################################################################
-#- name: "Define OpenShift BuildConfig: "{{ project_name }}"
-#  openshift_v1_build_config:
-#    namespace: '{{ namespace }}'
-#    name: "{{ project_name }}"
-#    spec_output_image_labels:
-#    - project: "{{ project_name }}"
-#    - source: vsts
-#    spec_output_to_name: "{{ project_name }}"
-#    spec_output_to_namespace: openshift
-#    revision_git_author_name: Visual Studio Team Services
-#    spec_source_git_ref: "{{ vstsGitRepo.json.defaultBranch }}"
-#    spec_source_git_uri: "{{ vstsGitRepo.json.remoteUrl }}"
-#    spec_source_images: openshift/nodejs
-#    spec_source_type: source
-    
-#- name: "Define OpenShift BuildConfig: "{{ project_name }}"
-#  command: "oc new-build "{{ vstsGitrepo.json.remoteUrl }}"
-
 - name: "Delete OpenShift Git Secret"
   k8s_v1_secret:
     namespace: "{{ namespace }}"
@@ -33,7 +15,7 @@
   openshift_v1_image_stream:
     namespace: "{{ namespace }}"
     verify_ssl: false
-    name: "{{ project_name }}"
+    name: "{{ namespace }}"
     state: absent
   tags:
   - openshift
@@ -42,7 +24,7 @@
   openshift_v1_build_config:
     namespace: "{{ namespace }}"
     verify_ssl: false
-    name: "{{ project_name }}"
+    name: "{{ namespace }}"
     state: absent
   tags:
   - openshift
@@ -51,7 +33,7 @@
   openshift_v1_deployment_config:
     namespace: "{{ namespace }}"
     verify_ssl: false
-    name: "{{ project_name }}"
+    name: "{{ namespace }}"
     state: absent
   tags:
   - openshift
@@ -60,7 +42,7 @@
   k8s_v1_service:
     namespace: "{{ namespace }}"
     verify_ssl: false
-    name: "{{ project_name }}"
+    name: "{{ namespace }}"
     state: absent
   tags:
   - openshift

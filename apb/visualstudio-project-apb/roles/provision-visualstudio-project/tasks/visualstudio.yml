@@ -2,7 +2,7 @@
 #############################################################################
 # Provision visualstudio-build
 #############################################################################
-- name: "Define VisualStudio Project: {{ project_name }}"
+- name: "Define VisualStudio Project: {{ namespace }}"
   uri:
     url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/_apis/projects?api-version=2.0-preview"
     method: POST
@@ -17,7 +17,7 @@
   tags:
   - visualstudio
 
-- name: "Wait for project creation completion: {{ project_name }}"
+- name: "Wait for project creation completion: {{ namespace }}"
   uri:
     url: "{{ vstsProjectCreate.json.url }}"
     user: "{{ vsts_username }}"
@@ -32,9 +32,9 @@
   tags:
   - visualstudio
 
-- name: "Get VisualStudio Project: {{ project_name }}"
+- name: "Get VisualStudio Project: {{ namespace }}"
   uri:
-    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/_apis/projects/{{ project_name }}?api-version=1.0"
+    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/_apis/projects/{{ namespace }}?api-version=1.0"
     user: "{{ vsts_username }}"
     password: "{{ vsts_password }}"
     force_basic_auth: yes
@@ -74,9 +74,9 @@
 #    body_format: json
 #  register: vstsGitRepo
 
-- name: "Get VisualStudio Git repository: {{ project_name }}"
+- name: "Get VisualStudio Git repository: {{ namespace }}"
   uri:
-    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/{{ vstsProject.json.id }}/_apis/git/repositories/{{ project_name }}?api-version=1.0"
+    url: "https://{{ vsts_instance }}.visualstudio.com/DefaultCollection/{{ vstsProject.json.id }}/_apis/git/repositories/{{ namespace }}?api-version=1.0"
     user: "{{ vsts_username }}"
     password: "{{ vsts_password }}"
     force_basic_auth: yes
@@ -146,7 +146,7 @@
   tags:
   - visualstudio
 
-- name: "Wait for Git import completion: {{ project_name }}"
+- name: "Wait for Git import completion: {{ namespace }}"
   uri:
     url: "{{ vstsGitImport.json.url }}"
     user: "{{ vsts_username }}"

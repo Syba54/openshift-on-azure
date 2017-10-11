@@ -1,6 +1,6 @@
 {
-  "name": "{{ project_name }}",
-  "description": "{{ project_name }}",
+  "name": "{{ namespace }}",
+  "description": "{{ namespace }}",
   "visibility": "public",
   "capabilities": {
     "versioncontrol": {

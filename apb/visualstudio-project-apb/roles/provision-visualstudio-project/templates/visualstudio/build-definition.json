@@ -126,7 +126,7 @@
         "properties": {},
         "name": "jobName",
         "label": "Job name",
-        "defaultValue": "build-{{ project_name }}",
+        "defaultValue": "build-{{ namespace }}",
         "required": true,
         "type": "string",
         "helpMarkDown": "The name of the Jenkins job to queue.  This must exactly match the job name on the Jenkins server.",
@@ -164,7 +164,7 @@
       "isHosted": true
     }
   },
-  "name": "{{ project_name }}-Jenkins-CI",
+  "name": "{{ namespace }}-Jenkins-CI",
   "path": "\\",
   "type": "build",
   "queueStatus": "enabled",

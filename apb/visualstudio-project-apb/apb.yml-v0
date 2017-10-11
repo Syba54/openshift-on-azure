@@ -1,0 +1,18 @@
+id: 4fbcc051-03af-40c7-86e2-dc12977e6b5e
+name: visualstudio-apb
+image: sterburg/visualstudio-apb
+description: "VisualStudio apb implementation"
+bindable: false
+async: optional
+metadata:
+  displayName: "VisualStudio (APB)"
+  longDescription: "An apb that creates a VisualStudio project"
+  console.openshift.io/iconClass: icon-desktop
+  documentationUrl: "https://www.visualstudio.com"
+parameters:
+  - git_repo:
+      title: Git Repo to clone
+      type: string
+      default: https://github.com/redhat-developer/s2i-dotnetcore-ex.git
+required:
+  - git_repo

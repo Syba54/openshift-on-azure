@@ -1,16 +1,23 @@
 ---
-version: 1.0
+version: 0.1
+id: 4fbcc051-03af-40c7-86e2-dc12977e6b53
 name: visualstudio-apb
 image: sterburg/visualstudio-apb
-description: VisualStudio apb implementation
+description: "VisualStudio apb implementation 2"
 bindable: false
 async: optional
 metadata:
-  documentationUrl: https://www.visualstudio.com
-  longDescription: An apb that deploys a VisualStudio.com project
-  displayName: VisualStudio (APB)
-  console.openshift.io/iconClass: icon-dotnet
-  providerDisplayName: "STerburg, Inc."
+  displayName: "VisualStudio (APB)"
+  longDescription: "An apb that creates a VisualStudio project"
+  console.openshift.io/iconClass: fa-windows
+  documentationUrl: "https://www.visualstudio.com"
+parameters:
+  - git_repo:
+      title: Git Repo to clone
+      type: string
+      default: https://github.com/redhat-developer/s2i-dotnetcore-ex0.git
+required:
+  - git_repo
 plans:
   - name: default
     description: An APB that deploys 1 VisualStudio project
@@ -21,7 +28,8 @@ plans:
       cost: "$0.00"
     parameters:
       - name: git_repo
-        default: "https://github.com/redhat-developer/s2i-dotnetcore-ex.git"
+        default: "https://github.com/redhat-developer/s2i-dotnetcore-ex1.git"
         type: string
         title: Git Repo to clone
         required: true
+

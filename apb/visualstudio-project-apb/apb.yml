@@ -3,12 +3,12 @@ version: 0.1
 id: 4fbcc051-03af-40c7-86e2-dc12977e6b53
 name: visualstudio-apb
 image: sterburg/visualstudio-apb
-description: "VisualStudio apb implementation 2"
+description: "VisualStudio apb implementation"
 bindable: false
 async: optional
 metadata:
   displayName: "VisualStudio (APB)"
-  longDescription: "An apb that creates a VisualStudio project"
+  longDescription: "Creates a VisualStudio.com project, including Build Pipeline, integrated with OpenShift S2I."
   console.openshift.io/iconClass: fa-windows
   documentationUrl: "https://www.visualstudio.com"
 parameters:

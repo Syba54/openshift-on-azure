@@ -1,0 +1,25 @@
+---
+#############################################################################
+# Get VisualStudio.com credentials from the OpenShift hosted environment
+#############################################################################
+- name: "Get secret/vsts-credentials"
+  k8s_v1_config_map:
+    name: vsts-credentials
+    namespace: openshift-ansible-service-broker
+    username: ansible
+    password: Ing4eiwocohp1iyaemeeri7koowaeghie5ohShoMoo2yuY5iagieNgoov7KiKoJ4
+  register: vsts_credentials
+  ignore_errors: true
+  tags:
+  - visualstudio
+
+- debug: var=vsts_credentials
+
+- name: "Set VSTS variables"
+  set_fact:
+    vsts_username: "{{ vsts_credentials.config_map.data.username }}"
+    vsts_password: "{{ vsts_credentials.config_map.data.password }}"
+    vsts_url: "{{ vsts_credentials.config_map.data.url }}"
+  when: vsts_credentials|succeeded
+  tags:
+  - visualstudio

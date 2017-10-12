@@ -399,8 +399,10 @@ ansible_ssh_user=$SUDOUSER
 ansible_become=yes
 containerized=true
 openshift_install_examples=true
-deployment_type=openshift-enterprise
-openshift_release=v3.6
+#deployment_type=openshift-enterprise
+deployment_type=origin
+openshift_release=v3.7
+openshift_image_tag=latest
 docker_udev_workaround=True
 openshift_use_dnsmasq=true
 openshift_master_default_subdomain=$ROUTING
@@ -436,13 +438,18 @@ openshift_master_logging_public_url=https://kibana.$ROUTING
 
 # Setup Service Catalog
 openshift_enable_service_catalog=true
-openshift_service_catalog_image_prefix=openshift3/ose-
 openshift_template_service_broker_namespaces=['openshift','mycatalog']
-ansible_service_broker_image_prefix=openshift3/ose-
-ansible_service_broker_registry_url="registry.access.redhat.com"
-#ansible_service_broker_registry_user=<user_name> 
+
+openshift_service_catalog_image_prefix=openshift/origin-
+ansible_service_broker_image_prefix=ansibleplaybookbundle/
+#openshift_service_catalog_image_prefix=openshift3/ose-
+#ansible_service_broker_image_prefix=openshift3/ose-
+
+#ansible_service_broker_registry_url="registry.access.redhat.com"
+ansible_service_broker_registry_url="docker.io"
+ansible_service_broker_registry_organization=sterburg
+#ansible_service_broker_registry_user="sterburg"
 #ansible_service_broker_registry_password=<password> 
-#ansible_service_broker_registry_organization=<organization> 
 
 openshift_hosted_etcd_storage_kind=dynamic
 openshift_hosted_etcd_storage_volume_name=etcd-vol2
@@ -500,9 +507,11 @@ new_nodes
 ansible_ssh_user=$SUDOUSER
 ansible_become=yes
 openshift_install_examples=true
-deployment_type=openshift-enterprise
+#deployment_type=openshift-enterprise
+deployment_type=origin
 containerized=true
-openshift_release=v3.6
+openshift_release=v3.7
+openshift_image_tag=latest
 docker_udev_workaround=True
 openshift_use_dnsmasq=true
 openshift_master_default_subdomain=$ROUTING
@@ -539,14 +548,19 @@ openshift_master_logging_public_url=https://kibana.$ROUTING
 
 # Setup Service Catalog
 openshift_enable_service_catalog=true
-openshift_service_catalog_image_prefix=openshift3/ose-
-openshift_service_catalog_image_version=latest
 openshift_template_service_broker_namespaces=['openshift','mycatalog']
-ansible_service_broker_image_prefix=openshift3/ose-
-ansible_service_broker_registry_url="registry.access.redhat.com"
-#ansible_service_broker_registry_user=<user_name> 
+
+openshift_service_catalog_image_prefix=openshift/origin-
+ansible_service_broker_image_prefix=ansibleplaybookbundle/
+#openshift_service_catalog_image_prefix=openshift3/ose-
+#ansible_service_broker_image_prefix=openshift3/ose-
+
+#ansible_service_broker_registry_url="registry.access.redhat.com"
+ansible_service_broker_registry_url="docker.io"
+ansible_service_broker_registry_organization=sterburg
+#ansible_service_broker_registry_user="sterburg"
 #ansible_service_broker_registry_password=<password> 
-#ansible_service_broker_registry_organization=<organization> 
+
 
 openshift_hosted_etcd_storage_kind=dynamic
 openshift_hosted_etcd_storage_volume_name=etcd-vol2

@@ -90,4 +90,9 @@ echo $(date) " - Installing Azure CLI"
 
 npm install -g azure-cli
 
+echo $(date) " - Installing OpenShift installer"
+
+mv /usr/share/ansible/openshift-ansible /usr/share/ansible/openshift-ansible.old
+git clone https://github.com/openshift/openshift-ansible.git /usr/share/ansible/openshift-ansible
+
 echo $(date) " - Script Complete"

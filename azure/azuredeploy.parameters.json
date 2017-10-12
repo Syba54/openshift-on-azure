@@ -69,7 +69,7 @@
 			"value": "azure"
 		},
 		"rhsmPoolId": {
-			"value": "8a85f98b5ddf5041015de4158ecb0d43"
+			"value": "8a85f9815dc4ef88015dc4f345e00d22"
 		},
 		"sshPublicKey": {
 			"value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkIwYuwUvULvMC2uZEv8hJwsBXi28+i6w3tjapS5LGjGgONdW5L5nehS8ud4BJExoJ+Bl1sUYDq8KOdwWT46OVGB1oReq0Zz4Y2U0E6waYFTOfCbpb/FRpaZojVhbIL4ko/IOw6msqqvhzdrXJNBmycccXxTRBa7EbBnF1mvRzSmhxAqP9C9itgH8AffNmxxh8X4O3zLdu56vX3VLiqDPFyaIyVC1ZuML7w6jsHIQeCDi1Iv7UE176CYx/o33V1C4QKe2VjzdssN7kENzJ65Xno29rRc4HnUDOrD8yTSI8qXVGXzaeITQDU6Q2A0oJaq+82ff14P3s7SgPqsKRFt59"
@@ -87,10 +87,10 @@
 			"value": "0bb19c17-74fe-45e7-b0ea-f584181e7c8c"
 		},
 		"aadClientSecret": {
-			"value": "changeme"
+			"value": "changeme",
 		},
 		"defaultSubDomainType": {
-			"value": "xipio"
+			"value": "custom"
 		},
 		"defaultSubDomain": {
 			"value": "openshift.eu"

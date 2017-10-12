@@ -11,9 +11,9 @@ echo $(date) " - Register host with Cloud Access Subscription"
 
 if [[ $SELECT == "usernamepassword" ]]
 then
-   subscription-manager register --username="$USERNAME_ORG" --password="$PASSWORD_ACT_KEY"
+   subscription-manager register --username="$USERNAME_ORG" --password="$PASSWORD_ACT_KEY" --force
 else
-   subscription-manager register --org="$USERNAME_ORG" --activationkey="$PASSWORD_ACT_KEY"
+   subscription-manager register --org="$USERNAME_ORG" --activationkey="$PASSWORD_ACT_KEY" --force
 fi
 
 if [ $? -eq 0 ]
@@ -55,7 +55,7 @@ echo $(date) " - Install base packages and update system to latest packages"
 
 yum -y install wget git net-tools bind-utils iptables-services bridge-utils bash-completion httpd-tools nodejs
 yum -y update --exclude=WALinuxAgent
-yum install atomic-openshift-excluder atomic-openshift-docker-excluder
+yum -y install atomic-openshift-excluder atomic-openshift-docker-excluder
 atomic-openshift-excluder unexclude
 
 # Install OpenShift utilities

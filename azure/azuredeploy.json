@@ -8,7 +8,7 @@
 				"description": "Base URL for Template Files",
 				"artifactsBaseUrl": ""
 			},
-			"defaultValue": "https://raw.githubusercontent.com/Microsoft/openshift-container-platform/master/"
+			"defaultValue": "https://raw.githubusercontent.com/sterburg/openshift-on-azure/master/"
 		},
 		"customVhdOrGallery": {
 			"type": "string",
@@ -22,14 +22,14 @@
 		},
 		"customStorageAccount": {
 			"type": "string",
-			"defaultValue": "https://osdiskstorageaccount.blob.core.windows.net/",
+			"defaultValue": "changeme",
 			"metadata": {
 				"description": "Storage account that contains the custom OS Disk.  This is the full URL of the Storage Account. Include the ending /"
 			}
 		},
 		"customOsDiskName": {
 			"type": "string",
-			"defaultValue": "images/customosdisk.vhd",
+			"defaultValue": "changeme",
 			"metadata": {
 				"description": "The name of the custom OS Disk and the folder it is located in."
 			}
@@ -96,7 +96,7 @@
 		},
 		"openshiftClusterPrefix": {
 			"type": "string",
-			"defaultValue": "mycluster",
+			"defaultValue": "ocp",
 			"minLength": 1,
 			"maxLength": 20,
 			"metadata": {
@@ -105,6 +105,7 @@
 		},
 		"openshiftMasterPublicIpDnsLabel": {
 			"type": "string",
+			"defaultValue": "openshift-api",
 			"minLength": 1,
 			"metadata": {
 				"description": "OpenShift Master Load Balancer public IP DNS name (hostname portion). Must be lowercase. It should match with the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$ or it will raise an error."
@@ -112,6 +113,7 @@
 		},
 		"infraLbPublicIpDnsLabel": {
 			"type": "string",
+			"defaultValue": "openshift-apps",
 			"minLength": 1,
 			"metadata": {
 				"description": "OpenShift Infra Nodes Load Balancer public IP DNS name (hostname portion). Must be lowercase. It should match with the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$ or it will raise an error."
@@ -155,7 +157,7 @@
 		},
 		"adminUsername": {
 			"type": "string",
-			"defaultValue": "ocpadmin",
+			"defaultValue": "sterburg",
 			"minLength": 1,
 			"metadata": {
 				"description": "Administrator username on all VMs and first user created for OpenShift login"
@@ -163,6 +165,7 @@
 		},
 		"openshiftPassword": {
 			"type": "securestring",
+			"defaultValue": "admin",
 			"minLength": 1,
 			"metadata": {
 				"description": "Password for OpenShift user to login to OpenShift Console"
@@ -171,7 +174,7 @@
 		"enableMetrics": {
 			"type": "string",
 			"minLength": 1,
-			"defaultValue": "false",
+			"defaultValue": "true",
 			"allowedValues": [
 				"true", "false"
 			],
@@ -204,7 +207,7 @@
 		"rhsmUsernamePasswordOrActivationKey": {
 			"type": "string",
 			"minLength": 1,
-			"defaultValue": "usernamepassword",
+			"defaultValue": "activationkey",
 			"allowedValues": [
 				"usernamepassword", "activationkey"
 			],
@@ -214,6 +217,7 @@
 		},
 		"rhsmUsernameOrOrgId": {
 			"type": "securestring",
+			"defaultValue": "7769467",
 			"minLength": 1,
 			"metadata": {
 				"description": "Red Hat Subscription Manager Username or Organization ID. If usernamepassword selected in previous input, then use Username; otherwise entier Organization ID. To find your Organization ID, run on registered server: subscription-manager identity"
@@ -221,6 +225,7 @@
 		},
 		"rhsmPasswordOrActivationKey": {
 			"type": "securestring",
+			"defaultValue": "azure",
 			"minLength": 1,
 			"metadata": {
 				"description": "Red Hat Subscription Manager Password or Activation Key. To find or create your Activation Key, go to: https://access.redhat.com/management/activation_keys"
@@ -228,6 +233,7 @@
 		},
 		"rhsmPoolId": {
 			"type": "string",
+			"defaultValue": "8a85f98b5ddf5041015de4158ecb0d43",
 			"minLength": 1,
 			"metadata": {
 				"description": "Red Hat Subscription Manager Pool ID with OpenShift entitlements. To find it, run on registered server: subscription-manager list"
@@ -235,12 +241,14 @@
 		},
 		"sshPublicKey": {
 			"type": "securestring",
+			"defaultValue": "",
 			"metadata": {
 				"description": "SSH public key for all VMs"
 			}
 		},
 		"keyVaultResourceGroup": {
 			"type": "string",
+			"defaultValue": "openshift",
 			"minLength": 1,
 			"metadata": {
 				"description": "Resource Group that contains the Key Vault"
@@ -248,6 +256,7 @@
 		},
 		"keyVaultName": {
 			"type": "string",
+			"defaultValue": "ssh-vault",
 			"minLength": 1,
 			"metadata": {
 				"description": "Name of the Key Vault"
@@ -255,6 +264,7 @@
 		},
 		"keyVaultSecret": {
 			"type": "securestring",
+			"defaultValue": "ssh-key",
 			"minLength": 1,
 			"metadata": {
 				"description": "Key Vault Secret Name that contains the Private Key"
@@ -262,6 +272,7 @@
 		},
 		"aadClientId": {
 			"type": "string",
+			"defaultValue": "0bb19c17-74fe-45e7-b0ea-f584181e7c8c",
 			"minLength": 1,
 			"metadata": {
 				"description": "Azure AD Client ID"
@@ -269,6 +280,7 @@
 		},
 		"aadClientSecret": {
 			"type": "securestring",
+			"defaultValue": "changeme",
 			"minLength": 1,
 			"metadata": {
 				"description": "Azure AD Client Secret"
@@ -276,7 +288,7 @@
 		},
 		"defaultSubDomainType": {
 			"type": "string",
-			"defaultValue": "xipio",
+			"defaultValue": "custom",
 			"allowedValues": [
 				"xipio", "custom"
 			],
@@ -286,7 +298,7 @@
 		},
 		"defaultSubDomain": {
 			"type": "string",
-			"defaultValue": "contoso.com",
+			"defaultValue": "openshift.eu",
 			"metadata": {
 				"description": "Default Subdomain for application routing (Wildcard DNS) - must enter something even if you are using xip.io. Must be all lowercase"
 			}
@@ -343,7 +355,7 @@
 		"osType": {
 			"publisher": "RedHat",
 			"offer": "RHEL",
-			"sku": "7.3",
+			"sku": "7.4",
 			"version": "latest"
 		},
 		"imageReference": "[variables('osType')]",

@@ -15,6 +15,7 @@ az group deployment create --name ocp-deployment \
                            --parameters aadClientSecret="$PASSWORD" \
                            --parameters openshiftPassword="$PASSWORD" \
                            --parameters sshPublicKey="`cat ~/.ssh/id_rsa.pub`" \
+                           --parameters keyVaultResourceGroup="$RESOURCE_GROUP" \
                            --resource-group $RESOURCE_GROUP \
                            --no-wait
 

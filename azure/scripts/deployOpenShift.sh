@@ -389,6 +389,7 @@ cat > /etc/ansible/hosts <<EOF
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
 masters
+etcd
 nodes
 master0
 new_nodes
@@ -458,6 +459,9 @@ openshift_hosted_etcd_storage_volume_size=1G
 openshift_hosted_etcd_storage_labels={'storage': 'etcd'}
 
 # host group for masters
+[etcd]
+$MASTER-0
+
 [masters]
 $MASTER-0
 
@@ -497,8 +501,8 @@ cat > /etc/ansible/hosts <<EOF
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
 masters
-nodes
 etcd
+nodes
 master0
 new_nodes
 
